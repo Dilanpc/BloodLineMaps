@@ -142,10 +142,12 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapInterface.cpp" />
+    <ClCompile Include="TileMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.hpp" />
     <ClInclude Include="MapInterface.hpp" />
+    <ClInclude Include="TileMenu.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

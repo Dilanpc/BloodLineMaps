@@ -2,19 +2,24 @@
 #include <SFML/Graphics.hpp>
 
 #include "MapInterface.hpp"
+#include "TileMenu.hpp"
 
 
+uint16_t const g_windowWidth = MapInterface::gridWindowWidth + TileMenu::backgroundWidth;
+uint16_t const g_windowHeight = MapInterface::gridWindowHeight;
 
 int main(int argc, const char* argv[])
 {
 	MapInterface::loadTexture();
 
 
-	sf::RenderWindow window(sf::VideoMode(MapInterface::windowWidth, MapInterface::windowHeight), "BloodLineMaps");
+	sf::RenderWindow window(sf::VideoMode(g_windowWidth, g_windowHeight), "BloodLineMaps");
 
-	MapInterface* mapInterface = new MapInterface();
-
+	MapInterface* mapInterface = new MapInterface(g_windowWidth, g_windowHeight);
+	TileMenu* tileMenu = new TileMenu(g_windowWidth, g_windowHeight, MapInterface::tileTexture);
+	
 	Cell::setTileset(MapInterface::tileTexture);
+
 
 
 	sf::CircleShape shape(32.f);
@@ -39,6 +44,9 @@ int main(int argc, const char* argv[])
 				if (event.key.code == sf::Keyboard::S) keyInput.y = 1;
 				if (event.key.code == sf::Keyboard::A) keyInput.x = -1;
 				if (event.key.code == sf::Keyboard::D) keyInput.x = 1;
+
+				if (event.key.code == sf::Keyboard::Up) tileMenu->moveDown();
+				if (event.key.code == sf::Keyboard::Down) tileMenu->moveUp();
 			}
 
 			if (event.type == sf::Event::KeyReleased)
@@ -52,6 +60,7 @@ int main(int argc, const char* argv[])
 
 			if (event.type == sf::Event::MouseButtonPressed)
 			{
+				window.setView(*mapInterface);
 				sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 				sf::Vector2i cell = MapInterface::locateClick(mousePos); // This is the position of the cell that was clicked
 
@@ -87,6 +96,7 @@ int main(int argc, const char* argv[])
 		window.clear();
 
 		mapInterface->draw(window);
+		tileMenu->draw(window);
 		window.draw(shape);
 
 		window.display();

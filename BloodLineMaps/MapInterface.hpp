@@ -8,13 +8,13 @@ class MapInterface : public sf::View
 {
 	using uint = unsigned int;
 public:
-	static const uint windowWidth = 1280U;
-	static const uint windowHeight = 720U;
+	static const uint gridWindowWidth = 1280U;
+	static const uint gridWindowHeight = 720U;
 	// Returns the cell that was clicked
 	static sf::Vector2i locateClick(const sf::Vector2f& click);
 
 public:
-	MapInterface();
+	MapInterface(int windowWidth, int windowHeight);
 
 	static void loadTexture();
 	static sf::Texture tileTexture;

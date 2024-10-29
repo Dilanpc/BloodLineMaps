@@ -15,13 +15,13 @@ sf::Vector2i MapInterface::locateClick(const sf::Vector2f& click)
 }
 
 
-MapInterface::MapInterface()
+MapInterface::MapInterface(int windowWidth, int windowHeight)
 	: sf::View(sf::FloatRect(0, 0, windowWidth, windowHeight)),
 	linesView(sf::FloatRect(0, 0, windowWidth, windowHeight))
 {
 
-	uint vLinesAmount = 1 + windowWidth / 64;
-	uint hLinesAmount = 1 + windowHeight / 64;
+	uint vLinesAmount = 1 + gridWindowWidth / 64;
+	uint hLinesAmount = 1 + gridWindowHeight / 64;
 
 	hLines.setPrimitiveType(sf::Lines);
 	vLines.setPrimitiveType(sf::Lines);
@@ -31,7 +31,7 @@ MapInterface::MapInterface()
 	for (uint i = 0; i < vLinesAmount; ++i)
 	{
 		vLines[i * 2].position = sf::Vector2f(i * 64, 0);
-		vLines[i * 2 + 1].position = sf::Vector2f(i * 64, windowHeight);
+		vLines[i * 2 + 1].position = sf::Vector2f(i * 64, gridWindowHeight);
 		vLines[i * 2].color = sf::Color::White;
 		vLines[i * 2 + 1].color = sf::Color::White;
 	}
@@ -39,7 +39,7 @@ MapInterface::MapInterface()
 	for (uint i = 0; i < hLinesAmount; ++i)
 	{
 		hLines[i * 2].position = sf::Vector2f(0, i * 64);
-		hLines[i * 2 + 1].position = sf::Vector2f(windowWidth, i * 64);
+		hLines[i * 2 + 1].position = sf::Vector2f(gridWindowWidth, i * 64);
 		hLines[i * 2].color = sf::Color::White;
 		hLines[i * 2 + 1].color = sf::Color::White;
 	}
