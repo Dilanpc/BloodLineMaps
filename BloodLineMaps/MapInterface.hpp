@@ -29,8 +29,8 @@ public:
 
 	bool isFree(sf::Vector2i cellCoords);
 
-	void addCell(sf::Vector2i cellCoords);
-	void delCell(sf::Vector2i cellCoords);
+	void addCell(const sf::Vector2i& cellCoords);
+	void delCell(const sf::Vector2i& cellCoords);
 
 	void nextTile();
 	void prevTile();

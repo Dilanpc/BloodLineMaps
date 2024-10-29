@@ -14,7 +14,7 @@ int main(int argc, const char* argv[])
 
 	MapInterface* mapInterface = new MapInterface();
 
-	Cell::setTexture(MapInterface::tileTexture);
+	Cell::setTileset(MapInterface::tileTexture);
 
 
 	sf::CircleShape shape(32.f);

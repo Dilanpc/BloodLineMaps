@@ -92,15 +92,19 @@ Cell* MapInterface::locateCell(sf::Vector2i cellCoords)
 }
 
 
-void MapInterface::addCell(sf::Vector2i cellCoords)
+void MapInterface::addCell(const sf::Vector2i& cellCoords)
 {
-	if (isFree(cellCoords))
+	Cell* cell = locateCell(cellCoords);
+	if (cell)
+	{
+		cell->setTextureCoords(sf::Vector2i(currentTile % textureWidth, currentTile / textureWidth));
+	} else
 	{
 		mapData.emplace_back(cellCoords, sf::Vector2i(currentTile % textureWidth, currentTile / textureWidth));
 	}
 }
 
-void MapInterface::delCell(sf::Vector2i cellCoords)
+void MapInterface::delCell(const sf::Vector2i& cellCoords)
 {
 	for (auto it = mapData.begin(); it != mapData.end(); ++it)
 	{

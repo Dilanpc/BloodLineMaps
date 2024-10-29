@@ -12,6 +12,8 @@ public:
 	int row;
 	int col;
 
+	void setTextureCoords(const sf::Vector2i& textureCoords);
+
 	static const sf::Texture* texture;
-	static void setTexture(const sf::Texture& texture);
+	static void setTileset(const sf::Texture& texture);
 };
