@@ -10,6 +10,8 @@ class TileMenu
 	const sf::Texture& tileset;
 	const uint16_t cols;
 
+	sf::RectangleShape selectedTile;
+
 	std::list<sf::RectangleShape> tiles;
 	uint16_t spacing = 10;
 
@@ -27,4 +29,6 @@ public:
 
 	void moveDown();
 	void moveUp();
+
+	sf::FloatRect getGlobalBounds();
 };

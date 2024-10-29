@@ -5,12 +5,16 @@ sf::Color TileMenu::backgroundColor(100, 100, 100, 200);
 uint16_t TileMenu::backgroundWidth = 100;
 
 TileMenu::TileMenu(int windowWidth, int windowHeight, const sf::Texture& tileset)
-	: view(sf::FloatRect(0, 0, windowWidth, windowHeight)), tileset(tileset), cols(tileset.getSize().x / 64)
+	: view(sf::FloatRect(0, 0, windowWidth, windowHeight)), tileset(tileset), cols(tileset.getSize().x / 64),
+	selectedTile(sf::Vector2f(68, 68)), firstTile(0)
 {
 	background.setFillColor(backgroundColor);
 	background.setPosition(windowWidth - backgroundWidth, 0);
 	background.setOutlineThickness(1);
 	background.setSize(sf::Vector2f(backgroundWidth, windowHeight));
+
+	selectedTile.setFillColor(sf::Color::Green);
+	selectedTile.setPosition(windowWidth - backgroundWidth / 2 - 34, 2 * spacing - 2 + 64);
 
 	setFirstTiles(windowWidth - backgroundWidth / 2 - 32);
 
@@ -61,8 +65,15 @@ void TileMenu::draw(sf::RenderWindow& window)
 {
 	window.setView(view);
 	window.draw(background);
+	window.draw(selectedTile);
 	for (const sf::RectangleShape& tile : tiles)
 	{
 		window.draw(tile);
 	}
+}
+
+
+sf::FloatRect TileMenu::getGlobalBounds()
+{
+	return background.getGlobalBounds();
 }

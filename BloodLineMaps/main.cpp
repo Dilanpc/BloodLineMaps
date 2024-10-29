@@ -22,11 +22,6 @@ int main(int argc, const char* argv[])
 
 
 
-	sf::CircleShape shape(32.f);
-	shape.setFillColor(sf::Color::Green);
-	shape.setOrigin(32, 32);
-	shape.setPosition(0, 0);
-
 	sf::Vector2i keyInput(0, 0);
 
 	while (window.isOpen())
@@ -45,8 +40,14 @@ int main(int argc, const char* argv[])
 				if (event.key.code == sf::Keyboard::A) keyInput.x = -1;
 				if (event.key.code == sf::Keyboard::D) keyInput.x = 1;
 
-				if (event.key.code == sf::Keyboard::Up) tileMenu->moveDown();
-				if (event.key.code == sf::Keyboard::Down) tileMenu->moveUp();
+				if (event.key.code == sf::Keyboard::Up) {
+					tileMenu->moveDown();
+					mapInterface->prevTile();
+				}
+				if (event.key.code == sf::Keyboard::Down) {
+					tileMenu->moveUp();
+					mapInterface->nextTile();
+				}
 			}
 
 			if (event.type == sf::Event::KeyReleased)
@@ -64,27 +65,27 @@ int main(int argc, const char* argv[])
 				sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 				sf::Vector2i cell = MapInterface::locateClick(mousePos); // This is the position of the cell that was clicked
 
-				if (event.mouseButton.button == sf::Mouse::Left)
+				if (event.mouseButton.button == sf::Mouse::Left && !tileMenu->getGlobalBounds().contains(mousePos))
 				{
 					mapInterface->addCell(cell);
 				}
-				else if (event.mouseButton.button == sf::Mouse::Right)
+				else if (event.mouseButton.button == sf::Mouse::Right && !tileMenu->getGlobalBounds().contains(mousePos))
 				{
 					mapInterface->delCell(cell);
 				}
-					std::cout << mapInterface->mapData.size() << std::endl;
 			}
 			if (event.type == sf::Event::MouseWheelScrolled)
 			{
 				if (event.mouseWheelScroll.delta < 0)
 				{
+					tileMenu->moveUp();
 					mapInterface->nextTile();
 				}
 				else if (event.mouseWheelScroll.delta > 0)
 				{
+					tileMenu->moveDown();
 					mapInterface->prevTile();
 				}
-				std::cout << mapInterface->currentTile << std::endl;
 			}
 		}
 
@@ -97,7 +98,6 @@ int main(int argc, const char* argv[])
 
 		mapInterface->draw(window);
 		tileMenu->draw(window);
-		window.draw(shape);
 
 		window.display();
 

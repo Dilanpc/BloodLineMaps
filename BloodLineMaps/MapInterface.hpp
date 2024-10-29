@@ -42,6 +42,6 @@ public:
 	sf::VertexArray hLines;
 	sf::VertexArray vLines;
 
-	unsigned int currentTile = 0;
+	unsigned int currentTile = 1; // Starts with second tile
 
 };
