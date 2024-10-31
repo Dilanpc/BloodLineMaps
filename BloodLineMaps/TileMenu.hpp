@@ -30,5 +30,7 @@ public:
 	void moveDown();
 	void moveUp();
 
+	void rotate();
+
 	sf::FloatRect getGlobalBounds();
 };

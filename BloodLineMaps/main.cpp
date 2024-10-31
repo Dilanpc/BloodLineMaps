@@ -48,6 +48,9 @@ int main(int argc, const char* argv[])
 					tileMenu->moveUp();
 					mapInterface->nextTile();
 				}
+				if (event.key.code == sf::Keyboard::R) {
+					tileMenu->rotate();
+				}
 			}
 
 			if (event.type == sf::Event::KeyReleased)
