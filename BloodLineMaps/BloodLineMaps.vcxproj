@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapInterface.cpp" />
     <ClCompile Include="TileMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cell.hpp" />
+    <ClInclude Include="FileManager.hpp" />
     <ClInclude Include="MapInterface.hpp" />
     <ClInclude Include="TileMenu.hpp" />
   </ItemGroup>
