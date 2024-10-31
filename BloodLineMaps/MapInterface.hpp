@@ -37,8 +37,9 @@ public:
 
 	void rotate();
 
-private:
 	std::vector<Cell> mapData;
+
+private:
 
 	sf::View linesView;
 	sf::VertexArray hLines;

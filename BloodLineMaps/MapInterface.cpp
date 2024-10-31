@@ -81,7 +81,7 @@ Cell* MapInterface::locateCell(sf::Vector2i cellCoords)
 {
 	for (Cell& cell : mapData)
 	{
-		if (cell.row == cellCoords.x && cell.col == cellCoords.y)
+		if (cell.col == cellCoords.x && cell.row == cellCoords.y)
 		{
 			return &cell;
 		}
@@ -95,20 +95,19 @@ void MapInterface::addCell(const sf::Vector2i& cellCoords)
 	Cell* cell = locateCell(cellCoords);
 	if (cell)
 	{
-		cell->setTextureCoords(sf::Vector2i(currentTile % textureWidth, currentTile / textureWidth));
+		cell->setTextureNum(currentTile);
+		cell->setRotation(currentRotation * 90);
 	} else
 	{
-		mapData.emplace_back(cellCoords, sf::Vector2i(currentTile % textureWidth, currentTile / textureWidth));
-		cell = &mapData.back();
+		mapData.emplace_back(cellCoords, currentTile, currentRotation);
 	}
-	cell->setRotation(currentRotation);
 }
 
 void MapInterface::delCell(const sf::Vector2i& cellCoords)
 {
 	for (auto it = mapData.begin(); it != mapData.end(); ++it)
 	{
-		if (it->row == cellCoords.x && it->col == cellCoords.y)
+		if (it->col == cellCoords.x && it->row == cellCoords.y)
 		{
 			mapData.erase(it);
 			break;
@@ -128,5 +127,5 @@ void MapInterface::prevTile()
 
 void MapInterface::rotate()
 {
-	currentRotation = (currentRotation + 90) % 360;
+	currentRotation = (currentRotation + 1) % 4;
 }

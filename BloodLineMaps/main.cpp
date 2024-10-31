@@ -3,6 +3,7 @@
 
 #include "MapInterface.hpp"
 #include "TileMenu.hpp"
+#include "FileManager.hpp"
 
 
 uint16_t const g_windowWidth = MapInterface::gridWindowWidth + TileMenu::backgroundWidth;
@@ -19,7 +20,6 @@ int main(int argc, const char* argv[])
 	TileMenu* tileMenu = new TileMenu(g_windowWidth, g_windowHeight, MapInterface::tileTexture);
 	
 	Cell::setTileset(MapInterface::tileTexture);
-
 
 
 	sf::Vector2i keyInput(0, 0);
@@ -51,6 +51,10 @@ int main(int argc, const char* argv[])
 				if (event.key.code == sf::Keyboard::R) {
 					tileMenu->rotate();
 					mapInterface->rotate();
+				}
+				if (event.key.code == sf::Keyboard::G) {
+					FileManager fileManager;
+					fileManager.saveMap(mapInterface);
 				}
 			}
 
@@ -109,5 +113,5 @@ int main(int argc, const char* argv[])
 
 		sf::sleep(sf::milliseconds(64));
 	}
-	delete mapInterface;
+	delete mapInterface, tileMenu;
 }
