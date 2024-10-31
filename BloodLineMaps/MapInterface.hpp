@@ -35,7 +35,9 @@ public:
 	void nextTile();
 	void prevTile();
 
-//private:
+	void rotate();
+
+private:
 	std::vector<Cell> mapData;
 
 	sf::View linesView;
@@ -43,5 +45,5 @@ public:
 	sf::VertexArray vLines;
 
 	unsigned int currentTile = 1; // Starts with second tile
-
+	uint16_t currentRotation = 0;
 };

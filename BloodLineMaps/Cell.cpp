@@ -6,7 +6,8 @@ Cell::Cell(const sf::Vector2i& gridCoords, const sf::Vector2i& textureCoords)
 	: row(gridCoords.x), col(gridCoords.y), sf::Sprite(*texture)
 {
 	setTextureCoords(textureCoords);
-	setPosition(row * 64, col * 64);
+	setOrigin(32, 32);
+	setPosition(row * 64 + 32, col * 64 + 32);
 }
 
 void Cell::setTextureCoords(const sf::Vector2i& textureCoords)

@@ -50,6 +50,7 @@ int main(int argc, const char* argv[])
 				}
 				if (event.key.code == sf::Keyboard::R) {
 					tileMenu->rotate();
+					mapInterface->rotate();
 				}
 			}
 

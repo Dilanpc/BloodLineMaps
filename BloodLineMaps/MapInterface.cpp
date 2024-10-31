@@ -63,8 +63,6 @@ void MapInterface::draw(sf::RenderWindow& window)
 void MapInterface::move(sf::Vector2f offset)
 {
 	setCenter(getCenter() + offset);
-
-
 }
 
 bool MapInterface::isFree(sf::Vector2i cellCoords)
@@ -101,7 +99,9 @@ void MapInterface::addCell(const sf::Vector2i& cellCoords)
 	} else
 	{
 		mapData.emplace_back(cellCoords, sf::Vector2i(currentTile % textureWidth, currentTile / textureWidth));
+		cell = &mapData.back();
 	}
+	cell->setRotation(currentRotation);
 }
 
 void MapInterface::delCell(const sf::Vector2i& cellCoords)
@@ -124,4 +124,9 @@ void MapInterface::nextTile()
 void MapInterface::prevTile()
 {
 	currentTile = (currentTile - 1) % (textureWidth * textureWidth);
+}
+
+void MapInterface::rotate()
+{
+	currentRotation = (currentRotation + 90) % 360;
 }
