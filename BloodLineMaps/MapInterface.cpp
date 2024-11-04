@@ -4,7 +4,7 @@ sf::Texture MapInterface::tileTexture;
 unsigned int MapInterface::textureWidth;
 void MapInterface::loadTexture()
 {
-	tileTexture.loadFromFile("../../BloodLine/BloodLine/resources/tilesets/city.jpg");
+	tileTexture.loadFromFile("city.jpg");
 	textureWidth = tileTexture.getSize().x / 64;
 }
 

@@ -3,14 +3,11 @@
 
 class MapInterface;
 
-class FileManager
+namespace File
 {
+	extern const std::string mapPath;
 
-public:
-	static const std::string mapPath;
-
-	FileManager();
-
-	static void saveMap(MapInterface* map);
+	void saveMap(MapInterface* map);
+	void openMap(MapInterface* map, std::string path = mapPath);
 
 };

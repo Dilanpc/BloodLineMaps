@@ -14,6 +14,7 @@ class Cell : public sf::Sprite
 	unsigned short m_rotation;
 public:
 	Cell(const sf::Vector2i& gridCoords, const unsigned int tileNum, const uint8_t rotation);
+	Cell(const sf::Vector2i& gridCoords, const int code);
 
 	int row;
 	int col;

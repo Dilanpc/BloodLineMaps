@@ -12,6 +12,19 @@ Cell::Cell(const sf::Vector2i& gridCoords, const unsigned int tileNum, const uin
 	setRotation(m_rotation * 90);
 }
 
+Cell::Cell(const sf::Vector2i& gridCoords, const int code)
+	: row(gridCoords.y), col(gridCoords.x), sf::Sprite(*texture)
+{
+	m_tileNum = code & 0x0000ffff;
+	m_rotation = (code & 0x000f0000) >> 16;
+
+	setTextureNum(m_tileNum);
+	setOrigin(32, 32);
+	setPosition(col * 64 + 32, row * 64 + 32);
+	setRotation(m_rotation * 90);
+
+}
+
 void Cell::setTextureNum(const unsigned int num)
 {
 	m_tileNum = num;

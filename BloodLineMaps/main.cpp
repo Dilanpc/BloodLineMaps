@@ -21,8 +21,15 @@ int main(int argc, const char* argv[])
 	
 	Cell::setTileset(MapInterface::tileTexture);
 
-
 	sf::Vector2i keyInput(0, 0);
+	sf::Clock saveTimer;
+	sf::Time saveTime = sf::seconds(5 * 60); // 5 minutes
+
+
+
+	// Open last map
+	File::openMap(mapInterface);
+
 
 	while (window.isOpen())
 	{
@@ -48,13 +55,12 @@ int main(int argc, const char* argv[])
 					tileMenu->moveUp();
 					mapInterface->nextTile();
 				}
-				if (event.key.code == sf::Keyboard::R) {
+				if (event.key.code == sf::Keyboard::R || event.key.code == sf::Keyboard::Right) {
 					tileMenu->rotate();
 					mapInterface->rotate();
 				}
 				if (event.key.code == sf::Keyboard::G) {
-					FileManager fileManager;
-					fileManager.saveMap(mapInterface);
+					File::saveMap(mapInterface);
 				}
 			}
 
@@ -109,7 +115,11 @@ int main(int argc, const char* argv[])
 
 		window.display();
 
-		
+		if (saveTimer.getElapsedTime() > saveTime)
+		{
+			File::saveMap(mapInterface);
+			saveTimer.restart();
+		}
 
 		sf::sleep(sf::milliseconds(64));
 	}

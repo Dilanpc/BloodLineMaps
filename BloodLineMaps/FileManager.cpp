@@ -2,14 +2,15 @@
 #include "MapInterface.hpp"
 #include <iostream>
 
-const std::string FileManager::mapPath = "Maps.txt";
-
-FileManager::FileManager()
+namespace File
 {
-}
+
+const std::string mapPath = "Maps.txt";
 
 
-void FileManager::saveMap(MapInterface* mapInterface)
+
+
+void saveMap(MapInterface* mapInterface)
 {
 	const std::vector<Cell>& mapData = mapInterface->mapData;
 	
@@ -57,5 +58,44 @@ void FileManager::saveMap(MapInterface* mapInterface)
 	}
 	file << '}';
 	file.close();
-
 }
+
+
+void openMap(MapInterface* mapInterface, std::string path)
+{
+	// Open File 
+	std::ifstream file(path);
+	if (!file.is_open()) {
+		std::cerr << "No se pudo abrir el archivo." << std::endl;
+		return;
+	}
+
+	std::string line;
+
+	// Get Matrix size
+	std::getline(file, line);
+	unsigned int matrixWidth = std::stoi(line);
+	std::getline(file, line);
+	unsigned int matrixHeight = std::stoi(line);
+
+	// Ignore '{'
+	file.ignore(std::numeric_limits<std::streamsize>::max(), '{');
+
+	std::vector<Cell>& data = mapInterface->mapData;
+	data.clear();
+
+	// Read Matrix
+	unsigned int i = -1;
+	while (std::getline(file, line, ','))
+	{
+		i++;
+		int code = std::stoi(line);
+		if (code == 0) continue;
+		data.emplace_back(sf::Vector2i(i % matrixWidth, i / matrixWidth), code);
+	}
+
+	file.close();
+}
+
+
+} // namespace File
