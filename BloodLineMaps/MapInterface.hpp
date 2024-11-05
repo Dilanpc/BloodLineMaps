@@ -16,8 +16,11 @@ public:
 public:
 	MapInterface(int windowWidth, int windowHeight);
 
-	static void loadTexture();
-	static sf::Texture tileTexture;
+	static void findSpriteSheets();
+	static void loadTextures();
+	static void nextTexture();
+	static std::vector<sf::Texture> tileTextures;
+	static sf::Texture* currentTexture;
 	static unsigned int textureWidth;
 
 
@@ -47,4 +50,7 @@ private:
 
 	unsigned int currentTile = 1; // Starts with second tile
 	uint16_t currentRotation = 0;
+
+	static std::vector<std::string> spriteSheets;
+
 };

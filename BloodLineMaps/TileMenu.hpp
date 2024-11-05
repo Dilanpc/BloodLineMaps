@@ -7,7 +7,7 @@ class TileMenu
 {
 	sf::View view;
 	sf::RectangleShape background;
-	const sf::Texture& tileset;
+	const sf::Texture* tileset;
 	const uint16_t cols;
 
 	sf::RectangleShape selectedTile;
@@ -24,7 +24,7 @@ public:
 	static uint16_t backgroundWidth;
 
 public:
-	TileMenu(int windowWidth, int windowHeight, const sf::Texture& tileset);
+	TileMenu(int windowWidth, int windowHeight, const sf::Texture* tileset);
 	void draw(sf::RenderWindow& window);
 
 	void moveDown();
@@ -33,4 +33,6 @@ public:
 	void rotate();
 
 	sf::FloatRect getGlobalBounds();
+
+	void setTileset(const sf::Texture* tileset);
 };

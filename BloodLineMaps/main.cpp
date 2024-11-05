@@ -11,15 +11,15 @@ uint16_t const g_windowHeight = MapInterface::gridWindowHeight;
 
 int main(int argc, const char* argv[])
 {
-	MapInterface::loadTexture();
+	MapInterface::loadTextures();
 
 
 	sf::RenderWindow window(sf::VideoMode(g_windowWidth, g_windowHeight), "BloodLineMaps");
 
 	MapInterface* mapInterface = new MapInterface(g_windowWidth, g_windowHeight);
-	TileMenu* tileMenu = new TileMenu(g_windowWidth, g_windowHeight, MapInterface::tileTexture);
+	TileMenu* tileMenu = new TileMenu(g_windowWidth, g_windowHeight, MapInterface::currentTexture);
 	
-	Cell::setTileset(MapInterface::tileTexture);
+	Cell::setTileset(MapInterface::currentTexture);
 
 	sf::Vector2i keyInput(0, 0);
 	sf::Clock saveTimer;
@@ -42,25 +42,30 @@ int main(int argc, const char* argv[])
 			{
 				if (event.key.code == sf::Keyboard::Escape) window.close();
 
-				if (event.key.code == sf::Keyboard::W) keyInput.y = -1;
-				if (event.key.code == sf::Keyboard::S) keyInput.y = 1;
-				if (event.key.code == sf::Keyboard::A) keyInput.x = -1;
-				if (event.key.code == sf::Keyboard::D) keyInput.x = 1;
+				else if (event.key.code == sf::Keyboard::W) keyInput.y = -1;
+				else if (event.key.code == sf::Keyboard::S) keyInput.y = 1;
+				else if (event.key.code == sf::Keyboard::A) keyInput.x = -1;
+				else if (event.key.code == sf::Keyboard::D) keyInput.x = 1;
 
-				if (event.key.code == sf::Keyboard::Up) {
+				else if (event.key.code == sf::Keyboard::Up) {
 					tileMenu->moveDown();
 					mapInterface->prevTile();
 				}
-				if (event.key.code == sf::Keyboard::Down) {
+				else if (event.key.code == sf::Keyboard::Down) {
 					tileMenu->moveUp();
 					mapInterface->nextTile();
 				}
-				if (event.key.code == sf::Keyboard::R || event.key.code == sf::Keyboard::Right) {
+				else if (event.key.code == sf::Keyboard::R || event.key.code == sf::Keyboard::Right) {
 					tileMenu->rotate();
 					mapInterface->rotate();
 				}
-				if (event.key.code == sf::Keyboard::G) {
+				else if (event.key.code == sf::Keyboard::G) {
 					File::saveMap(mapInterface);
+				}
+				else if (event.key.code == sf::Keyboard::T) {
+					MapInterface::nextTexture();
+					tileMenu->setTileset(MapInterface::currentTexture);
+					Cell::setTileset(MapInterface::currentTexture);
 				}
 			}
 

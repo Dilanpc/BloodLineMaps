@@ -22,7 +22,7 @@ public:
 	void setTextureNum(unsigned int num);
 
 	static const sf::Texture* texture;
-	static void setTileset(const sf::Texture& texture);
+	static void setTileset(const sf::Texture* texture);
 	static unsigned int textureWidth;
 
 	int getEncode() const;

@@ -31,10 +31,10 @@ void Cell::setTextureNum(const unsigned int num)
 	setTextureRect(sf::IntRect(64 * (num % textureWidth), 64 * (num / textureWidth), 64, 64));
 }
 
-void Cell::setTileset(const sf::Texture& texture)
+void Cell::setTileset(const sf::Texture* texture)
 {
-	Cell::texture = &texture;
-	textureWidth = texture.getSize().x / 64;
+	Cell::texture = texture;
+	textureWidth = texture->getSize().x / 64;
 }
 
 int Cell::getEncode() const
