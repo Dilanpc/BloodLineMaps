@@ -59,6 +59,10 @@ int main(int argc, const char* argv[])
 					tileMenu->rotate();
 					mapInterface->rotate();
 				}
+				else if (event.key.code == sf::Keyboard::M) {
+					tileMenu->mirror();
+					mapInterface->mirror();
+				}
 				else if (event.key.code == sf::Keyboard::G) {
 					File::saveMap(mapInterface);
 				}

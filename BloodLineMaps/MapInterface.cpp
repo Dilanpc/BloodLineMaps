@@ -127,10 +127,10 @@ void MapInterface::addCell(const sf::Vector2i& cellCoords)
 	{
 		cell->setTexture(*currentTexture);
 		cell->setTextureNum(currentTile);
-		cell->setRotation(currentRotation * 90);
+		cell->setTransform(currentTransform);
 	} else
 	{
-		mapData.emplace_back(cellCoords, currentTile, currentRotation);
+		mapData.emplace_back(cellCoords, currentTile, currentTransform);
 	}
 }
 
@@ -158,5 +158,10 @@ void MapInterface::prevTile()
 
 void MapInterface::rotate()
 {
-	currentRotation = (currentRotation + 1) % 4;
+	currentTransform = (((currentTransform & 0b11) + 1) % 4) | (currentTransform & 0b100);
+}
+
+void MapInterface::mirror()
+{
+	currentTransform = currentTransform ^ 0b100;
 }

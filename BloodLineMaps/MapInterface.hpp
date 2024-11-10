@@ -39,6 +39,7 @@ public:
 	void prevTile();
 
 	void rotate();
+	void mirror();
 
 	std::vector<Cell> mapData;
 
@@ -49,7 +50,7 @@ private:
 	sf::VertexArray vLines;
 
 	unsigned int currentTile = 1; // Starts with second tile
-	uint16_t currentRotation = 0;
+	uint8_t currentTransform = 0;
 
 	static std::vector<std::string> spriteSheets;
 

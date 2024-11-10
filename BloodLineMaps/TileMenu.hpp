@@ -31,6 +31,7 @@ public:
 	void moveUp();
 
 	void rotate();
+	void mirror();
 
 	sf::FloatRect getGlobalBounds();
 

@@ -70,6 +70,14 @@ void TileMenu::rotate()
 	}
 }
 
+void TileMenu::mirror()
+{
+	for (sf::RectangleShape& tile : tiles)
+	{
+		tile.setScale(-tile.getScale().x, tile.getScale().y);
+	}
+}
+
 
 void TileMenu::draw(sf::RenderWindow& window)
 {
