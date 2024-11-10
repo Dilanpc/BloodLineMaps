@@ -38,7 +38,7 @@ void Cell::setTransform(const uint8_t transform)
 	if (transform & 0b100) scale(-1, 1); // 3th bit is the mirror
 }
 
-void Cell::setTileset(const sf::Texture& texture)
+void Cell::setTileset(const sf::Texture* texture)
 {
 	Cell::texture = texture;
 	textureWidth = texture->getSize().x / 64;
